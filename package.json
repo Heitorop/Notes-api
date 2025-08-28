@@ -1,0 +1,18 @@
+{
+  "name": "notes_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --exitcrash --env-file=.env server.js"
+  },
+  "author": "Dold",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  }
+}

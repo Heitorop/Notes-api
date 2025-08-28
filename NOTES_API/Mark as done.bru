@@ -1,0 +1,21 @@
+meta {
+  name: Mark as done
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/api/mark-as-done
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"cooking"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
