@@ -1,25 +1,25 @@
 import http from "http";
-import { TaskController } from "./controller.js";
+import { NotesController } from "./controllers/NotesController.js";
 import { Router } from "./router.js";
 import { Middleware } from "./middleware.js";
 import { WSServer } from "./WebSockerServer.js";
-import { TaskService } from "./service.js";
+import { NotesService } from "./services/NotesService.js";
 
 const PORT = process.env.PORT || 8000;
 
 const wsServer = new WSServer();
-const service = new TaskService();
-const controller = new TaskController(service, wsServer);
+const service = new NotesService();
+const controller = new NotesController(service, wsServer);
 const router = new Router(controller);
 const middleware = new Middleware();
 
 const selected = ['logger'];
 const middlewaresToRun = selected.map(name => middleware[name].bind(middleware));
 
-router.post("/api/add-task", controller.addTask.bind(controller), middlewaresToRun);
-router.post("/api/mark-as-done", controller.markAsDone.bind(controller), middlewaresToRun);
-router.get("/api/tasks", controller.getTasks.bind(controller), middlewaresToRun);
-router.delete("/api/delete-task", controller.deleteTask.bind(controller), middlewaresToRun);
+router.post("/api/notes/add", controller.add.bind(controller), middlewaresToRun);
+router.post("/api/notes/mark-as-done", controller.markAsDone.bind(controller), middlewaresToRun);
+router.get("/api/notes/notes", controller.getAll.bind(controller), middlewaresToRun);
+router.delete("/api/notes/delete", controller.delete.bind(controller), middlewaresToRun);
 
 const server = http.createServer((req, res) => router.handle(req, res));
 wsServer.init(server);

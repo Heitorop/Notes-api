@@ -1,12 +1,12 @@
-export class TaskController {
+export class NotesController {
     constructor(service, wsServer) {
         this.service = service;
         this.wsServer = wsServer;
     }
 
-    async addTask(res, task) {
+    async add(res, task) {
         console.log(task);
-        const result = await this.service.addTask(task.name);
+        const result = await this.service.add(task.name);
         if (result) {
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ success: true, task: task.name }));
@@ -18,8 +18,8 @@ export class TaskController {
         }
     }
 
-    async getTasks(res) {
-        const tasks = await this.service.getTasks() || [];
+    async getAll(res) {
+        const tasks = await this.service.getAll() || [];
         if (!tasks.length) {
             console.log("No tasks found");
             res.writeHead(200, { "Content-Type": "application/json" });
@@ -45,8 +45,8 @@ export class TaskController {
         }
     }
 
-    async deleteTask(res, task) {
-        const result = await this.service.deleteTask(task.name);
+    async delete(res, task) {
+        const result = await this.service.delete(task.name);
         if (result) {
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ success: true, task: task.name }));
