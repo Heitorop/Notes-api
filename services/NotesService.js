@@ -1,4 +1,4 @@
-import { NotesRepository } from "../repositories/NotesRepository.ts";
+import { NotesRepository } from "../repositories/NotesRepository.js";
 
 export class NotesService {
     repo = new NotesRepository();
