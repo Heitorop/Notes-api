@@ -10,9 +10,14 @@
   "author": "Dold",
   "license": "MIT",
   "devDependencies": {
+    "@types/pg": "^8.15.5",
+    "drizzle-kit": "^0.31.4",
     "nodemon": "^3.1.10"
   },
   "dependencies": {
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "^0.44.5",
+    "pg": "^8.16.3",
     "ws": "^8.18.3"
   }
 }

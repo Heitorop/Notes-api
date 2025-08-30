@@ -16,10 +16,10 @@ const middleware = new Middleware();
 const selected = ['logger'];
 const middlewaresToRun = selected.map(name => middleware[name].bind(middleware));
 
-router.post("/api/add-task", controller.addTask.bind(controller));
-router.post("/api/mark-as-done", controller.markAsDone.bind(controller));
+router.post("/api/add-task", controller.addTask.bind(controller), middlewaresToRun);
+router.post("/api/mark-as-done", controller.markAsDone.bind(controller), middlewaresToRun);
 router.get("/api/tasks", controller.getTasks.bind(controller), middlewaresToRun);
-router.delete("/api/delete-task", controller.deleteTask.bind(controller));
+router.delete("/api/delete-task", controller.deleteTask.bind(controller), middlewaresToRun);
 
 const server = http.createServer((req, res) => router.handle(req, res));
 wsServer.init(server);

@@ -1,55 +1,55 @@
-const getRequestBody = (req) => {
-    return new Promise((resolve, reject) => {
-        let body = "";
-        req.on("data", chunk => body += chunk.toString());
-        req.on("end", () => {
-            try {
-                resolve(JSON.parse(body));
-            } catch (err) {
-                reject(err);
-            }
-        });
-    });
-};
+// const getRequestBody = (req) => {
+//     return new Promise((resolve, reject) => {
+//         let body = "";
+//         req.on("data", chunk => body += chunk.toString());
+//         req.on("end", () => {
+//             try {
+//                 resolve(JSON.parse(body));
+//             } catch (err) {
+//                 reject(err);
+//             }
+//         });
+//     });
+// };
 
 
 
-export const router = async (req, res) => {
-    if (req.method === 'POST' && req.url === '/api/add-task') {
-        try {
-            const data = await getRequestBody(req);
-            await controller.addTask(res, data.name);
-        } catch (err) {
-            console.error(err);
-            res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: "Invalid JSON" }));
-        }
-    } else if (req.method === 'POST' && req.url === '/api/mark-as-done') {
-        try {
-            const data = await getRequestBody(req);
-            await controller.markAsDone(res, data.name);
-        } catch (err) {
-            console.error(err);
-            res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: "Invalid JSON" }));
-        }
-    } else if (req.method === 'GET' && req.url === '/api/tasks') {
-        await controller.getTasks(res);
-    } else if (req.method === 'DELETE' && req.url === '/api/delete-task') {
-        try {
-            const data = await getRequestBody(req);
-            await controller.deleteTask(res, data.name);
-        } catch (err) {
-            console.error(err);
-            res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: "Invalid JSON" }));
-        }
-    } else {
-        res.writeHead(404, { "Content-Type": "text/plain" });
-        res.end("Not Found");
-    }
+// export const router = async (req, res) => {
+//     if (req.method === 'POST' && req.url === '/api/add-task') {
+//         try {
+//             const data = await getRequestBody(req);
+//             await controller.addTask(res, data.name);
+//         } catch (err) {
+//             console.error(err);
+//             res.writeHead(400, { "Content-Type": "application/json" });
+//             res.end(JSON.stringify({ error: "Invalid JSON" }));
+//         }
+//     } else if (req.method === 'POST' && req.url === '/api/mark-as-done') {
+//         try {
+//             const data = await getRequestBody(req);
+//             await controller.markAsDone(res, data.name);
+//         } catch (err) {
+//             console.error(err);
+//             res.writeHead(400, { "Content-Type": "application/json" });
+//             res.end(JSON.stringify({ error: "Invalid JSON" }));
+//         }
+//     } else if (req.method === 'GET' && req.url === '/api/tasks') {
+//         await controller.getTasks(res);
+//     } else if (req.method === 'DELETE' && req.url === '/api/delete-task') {
+//         try {
+//             const data = await getRequestBody(req);
+//             await controller.deleteTask(res, data.name);
+//         } catch (err) {
+//             console.error(err);
+//             res.writeHead(400, { "Content-Type": "application/json" });
+//             res.end(JSON.stringify({ error: "Invalid JSON" }));
+//         }
+//     } else {
+//         res.writeHead(404, { "Content-Type": "text/plain" });
+//         res.end("Not Found");
+//     }
 
-}
+// }
 
 export class Router {
     constructor(controller) {
@@ -84,7 +84,7 @@ export class Router {
 
             const middlewares = route.middlewares || [];
             let i = 0;
-            console.log(route);
+            console.log(req.url);
             const next = async () => {
                 if (i < middlewares.length) {
                     await middlewares[i++](req, res, next);
