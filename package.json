@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exitcrash --env-file=.env server.js"
+    "dev": "ts-node --esm --files server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "author": "Dold",
   "license": "MIT",

@@ -1,7 +1,7 @@
 import { ServerResponse } from "http";
-import { NotesService } from "../services/NotesService";
-import { Note, TaskPayload } from "../types";
-import { WSServer } from "../WebSockerServer";
+import { NotesService } from "../services/NotesService.js";
+import { Note, TaskPayload } from "../types.js";
+import { WSServer } from "../WebSockerServer.js";
 
 
 export class NotesController {

@@ -1,10 +1,10 @@
 import http, { IncomingMessage, ServerResponse } from "http";
-import { NotesController } from "./controllers/NotesController";
-import { Router } from "./router";
+import { NotesController } from "./controllers/NotesController.js";
+import { Router } from "./router.js";
 import { Middleware } from "./middleware.js";
-import { WSServer } from "./WebSockerServer";
-import { NotesService } from "./services/NotesService";
-import { NotesRepository } from "./repositories/NotesRepository";
+import { WSServer } from "./WebSockerServer.js";
+import { NotesService } from "./services/NotesService.js";
+import { NotesRepository } from "./repositories/NotesRepository.js";
 
 const PORT: number = Number(process.env.PORT) || 8000;
 
@@ -27,6 +27,6 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
 
 wsServer.init(server);
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}/`);
 });
