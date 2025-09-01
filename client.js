@@ -5,7 +5,6 @@ const ws = new WebSocket("ws://localhost:8000");
 ws.on("open", () => {
     console.log("Connected to server");
 
-    // отправляем тестовое сообщение
     ws.send(JSON.stringify({ action: "test" }));
 });
 

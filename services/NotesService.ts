@@ -1,9 +1,10 @@
 import { NotesRepository } from "../repositories/NotesRepository.js";
+import { Note } from "../types.js";
 
 export class NotesService {
-    repo = new NotesRepository();
+    constructor(private readonly repo: NotesRepository) { }
 
-    async add(taskName) {
+    async add(taskName: string): Promise<boolean> {
         if (!taskName) return false;
 
         try {
@@ -15,11 +16,11 @@ export class NotesService {
         }
     }
 
-    async getAll() {
+    async getAll(): Promise<Note[]> {
         return this.repo.getAll();
     }
 
-    async markAsDone(taskName) {
+    async markAsDone(taskName: string): Promise<boolean> {
         if (!taskName) return false;
         try {
             await this.repo.markAsDone(taskName);
@@ -29,7 +30,7 @@ export class NotesService {
         }
     }
 
-    async delete(taskName) {
+    async delete(taskName: string): Promise<boolean> {
         if (!taskName) return false;
         try {
             await this.repo.delete(taskName);
